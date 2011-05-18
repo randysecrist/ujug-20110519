@@ -9,5 +9,7 @@
 	<artifact type="configuration" name="dictionary-config"/>
 	<artifact type="bundle" name="dictionary-api" version="[0.0.0, 1.0.0)"/>
 	<artifact type="bundle" name="dictionary-english" version="[0.0.0, 1.0.0)"/>
+	<artifact type="bundle" name="dictionary-war" version="[0.0.0, 1.0.0)"/>
+	<artifact type="bundle" name="dictionary-korean" version="[0.0.0, 1.0.0)"/>
 
 </plan>
