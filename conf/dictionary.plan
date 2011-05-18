@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plan name="messaging-router.plan" version="1.0.0" scoped="true" atomic="false"
+        xmlns="http://www.springsource.org/schema/dm-server/plan"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+            http://www.springsource.org/schema/dm-server/plan 
+            http://www.springsource.org/schema/dm-server/plan/springsource-dm-server-plan.xsd">
+    
+	<artifact type="configuration" name="dictionary-config"/>
+	<artifact type="bundle" name="dictionary-api" version="[0.0.0, 1.0.0)"/>
+	<artifact type="bundle" name="dictionary-english" version="[0.0.0, 1.0.0)"/>
+
+</plan>

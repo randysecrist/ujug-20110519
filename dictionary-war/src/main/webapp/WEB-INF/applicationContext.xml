@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xmlns:osgix="http://www.springframework.org/schema/osgi-compendium"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd 
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd 
+                           http://www.springframework.org/schema/osgi 
+                           http://www.springframework.org/schema/osgi/spring-osgi.xsd 
+                           http://www.springframework.org/schema/osgi-compendium 
+                           http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd 
+                           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    
+    <!-- OSGI Imports -->
+    <!-- Single Reference Import
+    <osgi:reference
+     id="dictionary.service"
+     interface="ujug.virgo.dictionary.DictionaryService"
+     context-class-loader="service-provider" />
+    -->
+
+    <!-- List of Dictionaries -->
+	<osgi:list
+	 id="dictionary.services"
+	 interface="ujug.virgo.dictionary.DictionaryService"
+	 context-class-loader="service-provider" />
+    
+	<!-- =========================================================================== 
+		Spring configuration. These properties are not propogated to the child "servlet" 
+		contexts. If configuration properties are needed in any of the servlets, 
+		these beans will need to be defined within each servlet that needs them. 
+		=========================================================================== -->
+
+    <!--
+	<context:property-placeholder properties-ref="configuration.properties"/>
+	<osgix:cm-properties id="configuration.properties" persistent-id="ujug">
+		<prop key="foo">bar</prop>
+	</osgix:cm-properties>
+	-->
+
+</beans>

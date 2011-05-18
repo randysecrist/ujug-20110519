@@ -1,0 +1,193 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ujug.virgo</groupId>
+  <artifactId>dictionary-war</artifactId>
+  <version>0.0.1.SNAPSHOT</version>
+  <packaging>war</packaging>
+  
+  <name>Dictionary Web Application</name>
+  <description>Provides a REALLY simple front end to the dictionary service.</description>
+
+  <parent>
+    <groupId>ujug.virgo</groupId>
+    <artifactId>virgo-master</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  
+  <dependencies>
+    <!-- Import Bundle -->
+    <!-- com.springsource.org.apache.taglibs.standard;version="[1.1.2,2)" -->
+
+    <!-- Import Package -->
+    <!-- javax.servlet.http;version="[2.5.0,3)",
+         org.springframework.beans.factory.xml;version="[2.5.6,4)",
+         org.springframework.web.servlet;version="[2.5.6,4)",
+         org.springframework.web.servlet.handler;version="[2.5.6,4)",
+         org.springframework.web.servlet.mvc;version="[2.5.6,4)",
+         org.springframework.web.servlet.view;version="[2.5.6,4)"
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>com.springsource.javax.servlet</artifactId>
+      <version>2.5.0</version>
+      <scope>provided</scope>
+    </dependency>
+    -->
+
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>org.springframework.spring-library</artifactId>
+        <type>libd</type>
+        <version>3.0.5.RELEASE</version>
+        <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>ujug.virgo</groupId>
+      <artifactId>dictionary-api</artifactId>
+      <version>0.0.1.SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.6.0</version>
+        <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-simple</artifactId>
+        <version>1.6.0</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.8.1</version>
+        <scope>test</scope>
+    </dependency>
+    
+  </dependencies>
+  
+    <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-war-plugin</artifactId>
+          <configuration>
+            <!--  This precludes non provided libs (slf4j) from being in webapp
+            <packagingExcludes>WEB-INF/lib,WEB-INF/lib/**/*</packagingExcludes>
+            -->
+            <archive>
+              <manifestFile>src/main/webapp/META-INF/MANIFEST.MF</manifestFile>
+            </archive>
+          </configuration>
+      </plugin>
+      
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>2.1.0</version>
+        <extensions>true</extensions>
+        <configuration>
+          
+          <manifestLocation>src/main/webapp/META-INF</manifestLocation>
+          
+          <supportedProjectTypes>
+            <supportedProjectType>jar</supportedProjectType>
+            <supportedProjectType>bundle</supportedProjectType>
+            <supportedProjectType>war</supportedProjectType>
+          </supportedProjectTypes>
+
+          <instructions>
+            <Web-ContextPath>dictionary</Web-ContextPath>
+            
+            <Export-Package>
+              ujug.virgo.dictionary.web,
+              !*
+            </Export-Package>
+            
+            <Import-Library>org.springframework.spring;version="[3.0, 3.1)"</Import-Library>
+            <Import-Package>
+              ujug.virgo.dictionary,
+              org.slf4j,
+              org.eclipse.virgo.web.dm,
+              org.springframework.aop,
+              org.springframework.asm,
+              org.springframework.beans,
+              org.springframework.context,
+              org.springframework.context.config,
+              org.springframework.context.support,
+              org.springframework.core,
+              org.springframework.expression,
+              org.springframework.orm,
+              org.springframework.oxm,
+              org.springframework.web,
+              org.springframework.web.context,
+              org.springframework.web.servlet,
+              org.springframework.web.portlet,
+              org.springframework.osgi.config,
+              org.springframework.web.servlet.mvc.annotation,
+              org.springframework.web.servlet.view,
+              org.springframework.web.servlet.view.xml,
+              !*
+            </Import-Package>
+            
+            <Embed-Dependency>
+              *;scope=compile|runtime;type=!pom;inline=false
+            </Embed-Dependency>
+            <Embed-Transitive>true</Embed-Transitive>
+          </instructions>
+        </configuration>
+
+        <executions>
+          <execution>
+            <id>bundle-manifest</id>
+            <phase>process-classes</phase>
+            <goals>
+              <goal>bundle</goal>
+            </goals>
+          </execution>
+        </executions>
+        
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-install-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>war</packaging>
+              <artifactId>${project.artifactId}</artifactId>
+              <groupId>${project.groupId}</groupId>
+              <version>${project.version}</version>
+              <file>
+                ${project.build.directory}/${project.artifactId}-${project.version}.war
+              </file>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      
+    </plugins>
+    
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>src/main/webapp</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+    
+  </build>
+
+</project>

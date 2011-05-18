@@ -1,0 +1,50 @@
+--------------------------------
+| UJUG OSGI Virgo Example Code |
+--------------------------------
+
+This directory contains the following projects:
+
+conf
+  Configuration files for Virgo Deployment
+
+dictionary-api
+  API for the Dictionary Service Example
+
+dictionary-english
+  English Implementation of the Dictionary Service
+
+dictionary-korean
+  Korean Implementation of the Dictionary Service
+
+dictionary-war
+  Dictionary Service Web Application
+
+
+----------------------
+| Build Instructions |
+----------------------
+
+1)  Get Maven 3.0.2.
+
+Older versions of maven "may" work, but you could run into trouble with the libd dependency type.
+ 
+2)  Run Maven.
+
+-----------------------
+| Deploy Instructions |
+-----------------------
+
+1)  Get Virgo Web 2.1.0
+
+
+---------
+| Notes |
+---------
+
+While hooking a web application to Eclipse Virgo is pretty straight forward,
+integrating spring-mvc or spring-ws involves quite a bit of bundle / manifest
+information.  This is especially true of spring-ws or any java classes which
+use extensive annotation scanners, thread context loaders, or other class path
+tricks.
+
+Please contact [Randy Secrist](http://randysecrist.github.com/) for more info.
