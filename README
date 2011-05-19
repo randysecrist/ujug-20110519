@@ -25,6 +25,8 @@ dictionary-war
 
 1)  Java 1.6
 2)  Maven 3.0.2
+3)  IMPORTANT:  Copy the settings.xml file to $MAVEN_HOME
+    (see below)
 
 ----------------------
 | Build Instructions |
