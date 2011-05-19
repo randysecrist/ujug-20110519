@@ -51,6 +51,7 @@ From the ujug-20110519 directory run:
 
 2) ./deploy/virgo-web-server-2.1.1.RELEASE/bin/startup.sh -clean
 
+3) Point your browser to:  http://localhost:8080/dictionary
 
 --------------------------------------
 | Deploy Instructions - Long Version |
