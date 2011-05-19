@@ -19,6 +19,12 @@ dictionary-korean
 dictionary-war
   Dictionary Service Web Application
 
+-----------
+| Prereqs |
+-----------
+
+1)  Java 1.6
+2)  Maven 3.0.2
 
 ----------------------
 | Build Instructions |
@@ -26,16 +32,42 @@ dictionary-war
 
 1)  Get Maven 3.0.2.
 
-Older versions of maven "may" work, but you could run into trouble with the libd dependency type.
- 
-2)  Run Maven.
+2)  Copy settings.xml to $HOME/.m2
+    - Back up the one you have first!
 
------------------------
-| Deploy Instructions |
------------------------
+3)  Run Maven.
+    - 'mvn clean package'
 
-1)  Get Virgo Web 2.1.0
 
+-----------------------------
+| Quick Deploy Instructions |
+-----------------------------
+
+From the ujug-20110519 directory run:
+
+1) 'make deploy'
+
+2) ./deploy/virgo-web-server-2.1.1.RELEASE/bin/startup.sh -clean
+
+
+--------------------------------------
+| Deploy Instructions - Long Version |
+--------------------------------------
+
+
+1)  Get Virgo Web 2.1.0, unzip it.
+  - http://www.eclipse.org/downloads/download.php?file=/virgo/release/VWS/2.1.1.RELEASE/virgo-web-server-2.1.1.RELEASE.zip
+
+2)  Copy bundles from targets into $VIRGO_HOME/pickup
+  - cp dictionary-war/target/dictionary-war*.war deploy/virgo-web-server-2.1.1.RELEASE/pickup/
+  - ... repeat for each dictionary-* project ...
+
+3)  Start Virgo
+  - ./bin/startup.sh -clean
+
+(Optional / Informational)
+4)  Start Virgo in DEBUG mode:
+  - ./bin/startup.sh -clean -debug <port>
 
 ---------
 | Notes |
@@ -46,5 +78,9 @@ integrating spring-mvc or spring-ws involves quite a bit of bundle / manifest
 information.  This is especially true of spring-ws or any java classes which
 use extensive annotation scanners, thread context loaders, or other class path
 tricks.
+
+Deploy scripts are currently built for a unix, linux, os x, environment.  This
+does not preclude the possibility however that these examples be deployed into
+a microsoft windows system.
 
 Please contact [Randy Secrist](http://randysecrist.github.com/) for more info.
